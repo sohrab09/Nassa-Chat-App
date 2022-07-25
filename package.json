@@ -10,7 +10,7 @@
     "mern",
     "chat-app"
   ],
-  "author": "Piyush Agarwal",
+  "author": "Nassa Group",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
