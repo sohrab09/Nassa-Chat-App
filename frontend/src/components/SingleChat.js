@@ -160,129 +160,130 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
 
   return (
     <>
-    {selectedChat ? (
-      <>
-        <Text
-          fontSize={{ base: "28px", md: "30px" }}
-          pb={3}
-          px={2}
-          w="100%"
-          fontFamily="Work sans"
-          d="flex"
-          justifyContent={{ base: "space-between" }}
-          alignItems="center"
-        >
-          <div style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-          }}>
-            <IconButton
-              d={{ base: "flex", md: "none" }}
-              icon={<ArrowBackIcon />}
-              onClick={() => setSelectedChat("")}
-            />
-
-
-            {messages &&
-              (!selectedChat.isGroupChat ? (
-                <>
-                  {getSender(user, selectedChat.users)}
-                  <ProfileModal
-                    user={getSenderFull(user, selectedChat.users)}
-                  />
-                </>
-              ) : (
-                <>
-                  {selectedChat.chatName.toUpperCase()}
-                  <UpdateGroupChatModal
-                    fetchMessages={fetchMessages}
-                    fetchAgain={fetchAgain}
-                    setFetchAgain={setFetchAgain}
-                  />
-                </>
-              ))}
-          </div>
-        </Text>
-        <Box
-          d="flex"
-          flexDir="column"
-          justifyContent="flex-end"
-          p={3}
-          bg="#E8E8E8"
-          w="100%"
-          h="93%"
-          borderRadius="lg"
-          overflowY="hidden"
-        >
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: 'flex-end',
-              overflowY: "hidden",
-              height: "100%",
-              width: "100%",
-              padding: "0px 10px",
-              backgroundColor: "#E8E8E8",
-            }}
+      {selectedChat ? (
+        <>
+          <Text
+            fontSize={{ base: "28px", md: "30px" }}
+            pb={3}
+            px={2}
+            w="100%"
+            fontFamily="Work sans"
+            d="flex"
+            justifyContent={{ base: "space-between" }}
+            alignItems="center"
           >
-            {loading ? (
-              <Spinner
-                size="xl"
-                w={20}
-                h={20}
-                alignSelf="center"
-                margin="auto"
+            <div style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}>
+              <IconButton
+                d={{ base: "flex", md: "none" }}
+                icon={<ArrowBackIcon />}
+                onClick={() => setSelectedChat("")}
               />
-            ) : (
-              <div className="messages">
-                <ScrollableChat messages={messages} />
-              </div>
-            )}
 
-            <FormControl
-              onKeyDown={sendMessage}
-              id="first-name"
-              isRequired
-              mt={3}
+
+              {messages &&
+                (!selectedChat.isGroupChat ? (
+                  <>
+                    {getSender(user, selectedChat.users)}
+                    <ProfileModal
+                      user={getSenderFull(user, selectedChat.users)}
+                    />
+                  </>
+                ) : (
+                  <>
+                    {selectedChat.chatName.toUpperCase()}
+                    <UpdateGroupChatModal
+                      fetchMessages={fetchMessages}
+                      fetchAgain={fetchAgain}
+                      setFetchAgain={setFetchAgain}
+                    />
+                  </>
+                ))}
+            </div>
+          </Text>
+          <Box
+            d="flex"
+            flexDir="column"
+            justifyContent="flex-end"
+            p={3}
+            bg="#E8E8E8"
+            w="100%"
+            h="93%"
+            borderRadius="lg"
+            overflowY="hidden"
+          >
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: 'flex-end',
+                overflowY: "hidden",
+                height: "100%",
+                width: "100%",
+                padding: "0px 10px",
+                backgroundColor: "#E8E8E8",
+              }}
             >
-              {istyping ? (
-                <div>
-                  <Lottie
-                    options={defaultOptions}
-                    // height={50}
-                    width={70}
-                    style={{ marginBottom: 15, marginLeft: 0 }}
-                  />
-                </div>
+              {loading ? (
+                <Spinner
+                  size="xl"
+                  w={20}
+                  h={20}
+                  alignSelf="center"
+                  margin="auto"
+                />
               ) : (
-                <></>
+                <div className="messages">
+                  <ScrollableChat messages={messages} />
+                </div>
               )}
-              <Input
-                variant="filled"
-                bg="#E0E0E0"
-                placeholder="Enter a message.."
-                value={newMessage}
-                onChange={typingHandler}
-              />
-            </FormControl>
-          </div>
-        </Box>
-      </>
-    ) : (
-      // to get socket.io on same page
-      <div
-        style={{
-          textAlign: "center",
-          height: '100%'
-        }}
-      >
-        <img src={Robot} alt="" style={{ marginLeft: '30%' }} />
-        <h2 style={{ color: 'black', fontSize: '40px' }}> Please select a chat to start messaging.</h2>
-      </div>
-    )}
-  </>
+
+              <FormControl
+                onKeyDown={sendMessage}
+                id="first-name"
+                isRequired
+                mt={3}
+              >
+                {istyping ? (
+                  <div>
+                    <Lottie
+                      options={defaultOptions}
+                      // height={50}
+                      width={70}
+                      style={{ marginBottom: 15, marginLeft: 0 }}
+                    />
+                  </div>
+                ) : (
+                  <></>
+                )}
+                <Input
+                  variant="filled"
+                  bg="#E0E0E0"
+                  placeholder="Enter a message.."
+                  value={newMessage}
+                  onChange={typingHandler}
+                />
+              </FormControl>
+            </div>
+          </Box>
+        </>
+      ) : (
+        // to get socket.io on same page
+        <div
+          style={{
+            textAlign: "center",
+            height: '100%'
+          }}
+        >
+          <img src={Robot} alt="" style={{ marginLeft: '30%' }} />
+          <h2 style={{ color: 'black', fontSize: '40px' }}> Welcome, <span style={{ color: 'green' }}>{user.name}</span></h2>
+          <h4 style={{ color: 'black', fontSize: '20px' }}> Please select a chat to start messaging.</h4>
+        </div>
+      )}
+    </>
   );
 };
 
