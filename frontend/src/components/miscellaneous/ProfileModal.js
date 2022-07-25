@@ -10,7 +10,7 @@ import {
   // Button,
   useDisclosure,
   IconButton,
-  Text,
+  // Text,
   Image,
 } from "@chakra-ui/react";
 
@@ -47,12 +47,12 @@ const ProfileModal = ({ user, children }) => {
               boxSize="150px"
               src={`http://lucid.nassa.com.bd/EmployeeImage/${user.employeeId}.jpg`} alt={user.name} style={{ borderRadius: '50%' }}
             />
-            <Text
+            {/* <Text
               fontSize={{ base: "15px", md: "20px" }}
               fontFamily="Work sans"
             >
               Email: {user.email}
-            </Text>
+            </Text> */}
           </ModalBody>
           {/* <ModalFooter>
             <Button onClick={onClose}>Close</Button>
