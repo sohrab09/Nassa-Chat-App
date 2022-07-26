@@ -14,6 +14,9 @@ import animationData from "../animations/typing.json";
 import Robot from '../animations/robot.gif';
 import io from "socket.io-client";
 import UpdateGroupChatModal from "./miscellaneous/UpdateGroupChatModal";
+import Picker from "emoji-picker-react";
+
+
 import { ChatState } from "../Context/ChatProvider";
 const ENDPOINT = "http://localhost:5002";
 var socket, selectedChatCompare;
@@ -25,6 +28,18 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   const [socketConnected, setSocketConnected] = useState(false);
   const [typing, setTyping] = useState(false);
   const [istyping, setIsTyping] = useState(false);
+
+  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+  const handleEmojiPickerhideShow = () => {
+    setShowEmojiPicker(!showEmojiPicker);
+  };
+
+  const handleEmojiClick = (event, emojiObject) => {
+    let msg = newMessage;
+    msg += emojiObject.emoji;
+    setNewMessage(msg);
+  };
+
   const toast = useToast();
 
   const defaultOptions = {
@@ -259,13 +274,27 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
                 ) : (
                   <></>
                 )}
-                <Input
-                  variant="filled"
-                  bg="#E0E0E0"
-                  placeholder="Enter a message.."
-                  value={newMessage}
-                  onChange={typingHandler}
-                />
+                <div>
+
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                  <div style={{
+                    margin: '10px 10px',
+                    fontSize: '25px',
+                    color: '#828282',
+                    cursor: 'pointer',
+                  }}>
+                    <i className="fa fa-smile icons" onClick={handleEmojiPickerhideShow} />
+                    {showEmojiPicker && <Picker onEmojiClick={handleEmojiClick} />}
+                  </div>
+                  <Input
+                    variant="filled"
+                    bg="#E0E0E0"
+                    placeholder="Enter a message.."
+                    value={newMessage}
+                    onChange={typingHandler}
+                  />
+                </div>
               </FormControl>
             </div>
           </Box>
