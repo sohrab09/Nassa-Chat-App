@@ -23,7 +23,7 @@ const allUsers = asyncHandler(async (req, res) => {
 //@route           POST /api/user/
 //@access          Public
 const registerUser = asyncHandler(async (req, res) => {
-  const { name, employeeId, email, mobileNumber, password, pic } = req.body;
+  const { name, employeeId, email, mobileNumber, password } = req.body;
 
   if (!name || !employeeId || !email || !mobileNumber || !password) {
     res.status(400);
@@ -43,7 +43,6 @@ const registerUser = asyncHandler(async (req, res) => {
     email,
     mobileNumber,
     password,
-    pic,
   });
 
   if (user) {
@@ -54,7 +53,6 @@ const registerUser = asyncHandler(async (req, res) => {
       email: user.email,
       mobileNumber: user.mobileNumber,
       isAdmin: user.isAdmin,
-      pic: user.pic,
       token: generateToken(user._id),
     });
   } else {
@@ -77,7 +75,6 @@ const authUser = asyncHandler(async (req, res) => {
       name: user.name,
       employeeId: user.employeeId,
       isAdmin: user.isAdmin,
-      pic: user.pic,
       token: generateToken(user._id),
     });
   } else {

@@ -47,93 +47,92 @@ const MyChats = ({ fetchAgain }) => {
 
   return (
     <Box
-    d={{ base: selectedChat ? "none" : "flex", md: "flex" }}
-    flexDir="column"
-    alignItems="center"
-    p={3}
-    bg="white"
-    w={{ base: "100%", md: "31%" }}
-    borderRadius="lg"
-    borderWidth="1px"
-  >
-    <div style={{
-      base: selectedChat ? "display: none" : "display: flex",
-      alignItems: 'center',
-      padding: '3px',
-      width: '100%',
-      backgroundColor: 'white',
-      flexDirection: 'column',
-      borderRadius: 'lg',
-      borderWidth: '1px',
-    }}>
-      <Box
-        pb={3}
-        px={3}
-        fontSize={{ base: "28px", md: "30px" }}
-        fontFamily="Work sans"
-        d="flex"
-        w="100%"
-        justifyContent="space-between"
-        alignItems="center"
-      >
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            width: "100%",
-            paddingBottom: "5px",
-
-          }}
+      d={{ base: selectedChat ? "none" : "flex", md: "flex" }}
+      flexDir="column"
+      alignItems="center"
+      p={3}
+      bg="white"
+      w={{ base: "100%", md: "31%" }}
+      borderRadius="lg"
+      borderWidth="1px"
+    >
+      <div style={{
+        base: selectedChat ? "display: none" : "display: flex",
+        alignItems: 'center',
+        padding: '3px',
+        width: '100%',
+        backgroundColor: 'white',
+        flexDirection: 'column',
+        borderRadius: 'lg',
+      }}>
+        <Box
+          pb={3}
+          px={3}
+          fontSize={{ base: "28px", md: "30px" }}
+          fontFamily="Work sans"
+          d="flex"
+          w="100%"
+          justifyContent="space-between"
+          alignItems="center"
         >
-          My Chats
-          <GroupChatModal>
-            {/* <Button
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              width: "100%",
+              paddingBottom: "5px",
+
+            }}
+          >
+            My Chats
+            <GroupChatModal>
+              {/* <Button
               d="flex"
               fontSize={{ base: "17px", md: "10px", lg: "17px" }}
               rightIcon={<AddIcon />}
             >
               New Group Chat
             </Button> */}
-          </GroupChatModal>
-        </div>
-      </Box>
-      <Box
-        d="flex"
-        flexDir="column"
-        p={3}
-        bg="#F8F8F8"
-        w="100%"
-        h="90%"
-        borderRadius="lg"
-      // overflowY="hidden"
-      >
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            padding: "5px",
-            backgroundColor: "#F8F8F8",
-            width: "100%",
-            height: "90%",
-            borderRadius: "lg",
-            // overflowY: "hidden",
-          }}
+            </GroupChatModal>
+          </div>
+        </Box>
+        <Box
+          d="flex"
+          flexDir="column"
+          p={3}
+          bg="#F8F8F8"
+          w="100%"
+          h="90%"
+          borderRadius="lg"
+        // overflowY="hidden"
         >
-          {chats ? (
-            <Stack overflowY="scroll">
-              {chats.map((chat) => (
-                <Box
-                  onClick={() => setSelectedChat(chat)}
-                  cursor="pointer"
-                  bg={selectedChat === chat ? "#38B2AC" : "#E8E8E8"}
-                  color={selectedChat === chat ? "white" : "black"}
-                  px={3}
-                  py={2}
-                  borderRadius="lg"
-                  key={chat._id}
-                >
-                  
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              padding: "5px",
+              backgroundColor: "#F8F8F8",
+              width: "100%",
+              height: "90%",
+              borderRadius: "lg",
+              // overflowY: "hidden",
+            }}
+          >
+            {chats ? (
+              <Stack overflowY="scroll">
+                {chats.map((chat) => (
+                  <Box
+                    onClick={() => setSelectedChat(chat)}
+                    cursor="pointer"
+                    bg={selectedChat === chat ? "#38B2AC" : "#E8E8E8"}
+                    color={selectedChat === chat ? "white" : "black"}
+                    px={3}
+                    py={2}
+                    borderRadius="lg"
+                    key={chat._id}
+                  >
+
                     <Text
                       fontSize={{ base: "18px", md: "20px" }}
                     >
@@ -141,24 +140,24 @@ const MyChats = ({ fetchAgain }) => {
                         ? getSender(loggedUser, chat.users)
                         : chat.chatName}
                     </Text>
-                  {chat.latestMessage && (
-                    <Text fontSize="xs">
-                      <b>{chat.latestMessage.sender.name} : </b>
-                      {chat.latestMessage.content.length > 50
-                        ? chat.latestMessage.content.substring(0, 51) + "..."
-                        : chat.latestMessage.content}
-                    </Text>
-                  )}
-                </Box>
-              ))}
-            </Stack>
-          ) : (
-            <ChatLoading />
-          )}
-        </div>
-      </Box>
-    </div >
-  </Box >
+                    {chat.latestMessage && (
+                      <Text fontSize="xs">
+                        <b>{chat.latestMessage.sender.name} : </b>
+                        {chat.latestMessage.content.length > 50
+                          ? chat.latestMessage.content.substring(0, 51) + "..."
+                          : chat.latestMessage.content}
+                      </Text>
+                    )}
+                  </Box>
+                ))}
+              </Stack>
+            ) : (
+              <ChatLoading />
+            )}
+          </div>
+        </Box>
+      </div >
+    </Box >
   );
 };
 
